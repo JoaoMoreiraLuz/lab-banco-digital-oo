@@ -17,12 +17,17 @@ public abstract class Conta implements IConta {
 
 	@Override
 	public void sacar(double valor) {
-		saldo -= valor;
+		if (valor <= saldo) {
+			saldo -= valor;
+		} else {
+			System.out.println("Seu saldo deve ser maior que o valor!");
+		}
 	}
 
 	@Override
 	public void depositar(double valor) {
 		saldo += valor;
+		System.out.println("Valor de " + valor + " depositado na sua conta, saldo total: " + saldo);
 	}
 
 	@Override
@@ -44,6 +49,7 @@ public abstract class Conta implements IConta {
 	}
 
 	protected void imprimirInfosComuns() {
+		System.out.println("Olá, bem vindo a seção de informações " + this.cliente.getNome());
 		System.out.println(String.format("Titular: %s", this.cliente.getNome()));
 		System.out.println(String.format("Agencia: %d", this.agencia));
 		System.out.println(String.format("Numero: %d", this.numero));
